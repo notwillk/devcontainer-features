@@ -16,20 +16,19 @@ esac
 
 RELEASE_API="https://api.github.com/repos/casey/just/releases"
 if [ "$V" = "latest" ]; then
-  RELEASE_URL="$RELEASE_API/latest"
+  release_json="$(curl -fsSL "$RELEASE_API/latest")"
 else
   V="${V#v}"
-  RELEASE_URL="$RELEASE_API/tags/${V}"
+  release_json="$(curl -fsSL "$RELEASE_API/tags/${V}")"
 fi
 
-release_json="$(curl -fsSL "$RELEASE_URL")"
-tag="$(printf '%s' "$release_json" | sed -n 's/ *"tag_name": *"v\?\([^"}]*\)".*/\1/p' | head -n1)"
-[ -n "$tag" ] || tag="$V"
-tag="${tag#v}"
+# Grab tag from response or fall back to requested version
+TAG="$(printf '%s' "$release_json" | sed -n 's/^ *"tag_name": *"v\?\([^"]*\)".*/\1/p' | head -n1)"
+[ -n "$TAG" ] || TAG="${V#v}"
 
-asset_url="$(printf '%s' "$release_json" | grep -o "https://[^\"]*just-[^\"]*${JUST_ARCH}[^\"]*\.tar\.gz" | head -n1)"
+asset_url="$(printf '%s' "$release_json" | grep -o "https://[^\"]*just-[^\"]*${JUST_ARCH}[^\"]*\\.tar\\.gz" | head -n1)"
 if [ -z "$asset_url" ]; then
-  asset_url="https://github.com/casey/just/releases/download/v${tag}/just-${tag}-${JUST_ARCH}.tar.gz"
+  asset_url="https://github.com/casey/just/releases/download/v${TAG}/just-${TAG}-${JUST_ARCH}.tar.gz"
 fi
 
 tmp_tar="$(mktemp)"
