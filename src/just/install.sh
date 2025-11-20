@@ -25,17 +25,18 @@ fi
 release_json="$(curl -fsSL "$RELEASE_URL")"
 tag="$(printf '%s' "$release_json" | sed -n 's/ *"tag_name": *"v\?\([^"}]*\)".*/\1/p' | head -n1)"
 [ -n "$tag" ] || tag="$V"
+tag="${tag#v}"
 
-asset_url="$(printf '%s' "$release_json" | sed -n "s@.*browser_download_url": "\(https://[^\"]*just-${JUST_ARCH}\.tar\.gz\)"@\1@p" | head -n1)"
+asset_url="$(printf '%s' "$release_json" | grep -o "https://[^\"]*just-[^\"]*${JUST_ARCH}[^\"]*\.tar\.gz" | head -n1)"
 if [ -z "$asset_url" ]; then
-  asset_url="https://github.com/casey/just/releases/download/${tag}/just-${JUST_ARCH}.tar.gz"
+  asset_url="https://github.com/casey/just/releases/download/v${tag}/just-${tag}-${JUST_ARCH}.tar.gz"
 fi
 
 tmp_tar="$(mktemp)"
 curl -fsSL "$asset_url" -o "$tmp_tar"
 
 mkdir -p /usr/local/bin
- tar -xzf "$tmp_tar" -C /usr/local/bin just
+tar -xzf "$tmp_tar" -C /usr/local/bin just
 rm -f "$tmp_tar"
 
 chmod +x /usr/local/bin/just

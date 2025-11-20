@@ -19,9 +19,9 @@ check "just available" just --version
 
 if [ -n "${VERSION:-}" ] && [ "${VERSION}" != "latest" ]; then
   EXPECTED="${VERSION#v}"
-  check "just matches version" bash -lc "just --version | awk '{print $2}' | sed 's/^v//' | grep -Fx \"${EXPECTED}\""
+  check "just matches version" bash -lc "just --version | cut -d' ' -f2 | sed 's/^v//' | grep -Fx \"${EXPECTED}\""
 else
-  check "just version format" bash -lc "just --version | awk '{print $2}' | grep -Eq '^[0-9]+\\.[0-9]+\\.[0-9]+'"
+  check "just version format" bash -lc "just --version | cut -d' ' -f2 | grep -Eq '^[0-9]+\.[0-9]+\.[0-9]+'"
 fi
 
 reportResults
