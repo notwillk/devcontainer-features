@@ -1,0 +1,13 @@
+{
+  "id": "devcontainer-cli",
+  "version": "1.0.0",
+  "name": "Dev Container CLI",
+  "description": "Install the @devcontainers/cli npm package.",
+  "options": {
+    "version": {
+      "type": "string",
+      "default": "latest",
+      "description": "Version of @devcontainers/cli"
+    }
+  }
+}

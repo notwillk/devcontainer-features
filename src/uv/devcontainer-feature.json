@@ -1,0 +1,13 @@
+{
+  "id": "uv",
+  "version": "1.0.0",
+  "name": "uv",
+  "documentationURL": "https://astral.sh/uv",
+  "options": {
+    "version": {
+      "type": "string",
+      "default": "latest",
+      "description": "uv version (not used yet, installer auto-selects)"
+    }
+  }
+}

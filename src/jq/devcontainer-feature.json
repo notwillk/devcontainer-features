@@ -1,0 +1,12 @@
+{
+  "id": "jq",
+  "version": "1.0.0",
+  "name": "jq",
+  "options": {
+    "version": {
+      "type": "string",
+      "default": "latest",
+      "description": "Version of jq to install"
+    }
+  }
+}

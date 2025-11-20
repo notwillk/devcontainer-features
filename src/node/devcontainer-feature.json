@@ -1,0 +1,12 @@
+{
+  "id": "node",
+  "version": "1.0.0",
+  "name": "node",
+  "options": {
+    "version": {
+      "type": "string",
+      "default": "latest",
+      "description": "Version of node"
+    }
+  }
+}

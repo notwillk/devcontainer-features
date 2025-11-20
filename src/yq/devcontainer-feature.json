@@ -1,0 +1,12 @@
+{
+  "id": "yq",
+  "version": "1.0.0",
+  "name": "yq",
+  "options": {
+    "version": {
+      "type": "string",
+      "default": "latest",
+      "description": "Version of yq to install"
+    }
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "id": "golang",
+  "version": "1.0.0",
+  "name": "golang",
+  "description": "Install golang",
+  "options": {
+    "version": {
+      "type": "string",
+      "default": "latest",
+      "description": "Version of golang"
+    }
+  }
+}

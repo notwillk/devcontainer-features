@@ -1,0 +1,15 @@
+{
+  "id": "turbo",
+  "version": "1.0.0",
+  "name": "turborepo",
+  "dependsOn": {
+    "ghcr.io/notwillk/devcontainer-features/node:1": {}
+  },
+  "options": {
+    "version": {
+      "type": "string",
+      "default": "latest",
+      "description": "Turbo version to install (npm i -g turbo@<version>)"
+    }
+  }
+}
