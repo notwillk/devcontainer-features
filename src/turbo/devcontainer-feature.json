@@ -1,6 +1,6 @@
 {
   "id": "turbo",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "name": "turborepo",
   "dependsOn": {
     "ghcr.io/notwillk/devcontainer-features/node:1": {}
@@ -11,5 +11,9 @@
       "default": "latest",
       "description": "Turbo version to install (npm i -g turbo@<version>)"
     }
+  },
+  "containerEnv": {
+    "DO_NOT_TRACK": "1",
+    "TURBO_TELEMETRY_DISABLED": "1"
   }
 }
