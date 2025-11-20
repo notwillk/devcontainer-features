@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 V="${VERSION:-latest}"
 
 ARCH="$(dpkg --print-architecture)"
