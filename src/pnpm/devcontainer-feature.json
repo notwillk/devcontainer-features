@@ -1,0 +1,15 @@
+{
+  "id": "pnpm",
+  "version": "1.0.0",
+  "name": "pnpm",
+  "dependsOn": {
+    "ghcr.io/notwillk/devcontainer-features/node:1": {}
+  },
+  "options": {
+    "version": {
+      "type": "string",
+      "default": "latest",
+      "description": "pnpm version to install (npm i -g pnpm@<version>)"
+    }
+  }
+}
