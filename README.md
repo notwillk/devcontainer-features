@@ -6,10 +6,8 @@ A set of individual [devcontainer features](https://containers.dev/implementors/
 
 | Tool             | Feature                                                 | Options          |
 |------------------|---------------------------------------------------------|------------------|
-| checksy          | ghcr.io/notwillk/devcontainer-features/checksy          |                |
-| alias            | ghcr.io/notwillk/devcontainer-features/alias            | `name`, `exec`   |
 | devcontainer-cli | ghcr.io/notwillk/devcontainer-features/devcontainer-cli | `version`        |
-| github-cli       | ghcr.io/notwillk/devcontainer-features/github-cli      | `version`        |
+| github-cli       | ghcr.io/notwillk/devcontainer-features/github-cli       | `version`        |
 | golang           | ghcr.io/notwillk/devcontainer-features/golang           | `version`        |
 | jq               | ghcr.io/notwillk/devcontainer-features/jq               | `version`        |
 | just             | ghcr.io/notwillk/devcontainer-features/just             | `version`        |
