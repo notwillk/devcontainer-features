@@ -17,11 +17,11 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Install devcontainer CLI
-        run: npm install -g @devcontainers/cli
+      - name: Build devcontainer
+        run: devcontainer up --workspace-folder .
 
       - name: Test Features
-        run: ./test.sh
+        run: devcontainer exec --workspace-folder . just test
 
       - name: Publish Features
         uses: devcontainers/action@v1
