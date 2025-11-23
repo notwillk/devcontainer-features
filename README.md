@@ -14,6 +14,7 @@ A set of individual [devcontainer features](https://containers.dev/implementors/
 | jq               | ghcr.io/notwillk/devcontainer-features/jq               | `version`        |
 | just             | ghcr.io/notwillk/devcontainer-features/just             | `version`        |
 | node             | ghcr.io/notwillk/devcontainer-features/node             | `version`        |
+| openscad-cli     | ghcr.io/notwillk/devcontainer-features/openscad-cli     | -                |
 | pnpm             | ghcr.io/notwillk/devcontainer-features/pnpm             | `version`        |
 | turbo            | ghcr.io/notwillk/devcontainer-features/turbo            | `version`        |
 | uv               | ghcr.io/notwillk/devcontainer-features/uv               | `version`        |
