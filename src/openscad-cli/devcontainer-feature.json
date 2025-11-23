@@ -1,0 +1,11 @@
+{
+  "id": "openscad-cli",
+  "version": "1.0.0",
+  "name": "OpenSCAD CLI",
+  "description": "Installs the OpenSCAD command-line interface via apt on Debian/Ubuntu images.",
+  "documentationURL": "https://openscad.org/",
+  "options": {},
+  "installsAfter": [
+    "ghcr.io/devcontainers/features/common-utils"
+  ]
+}

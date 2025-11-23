@@ -5,6 +5,9 @@
 		"context": "."
 	},
 	"features": {
+		"./features/devcontainer-cli": {},
+		"./features/just": {},
+		"ghcr.io/devcontainers/features/common-utils": {},
 		"ghcr.io/devcontainers/features/docker-in-docker:2": {}
 	},
 	"containerEnv": {
