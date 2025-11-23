@@ -17,11 +17,11 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Build devcontainer
-        run: devcontainer up --workspace-folder .
-
       - name: Test Features
-        run: devcontainer exec --workspace-folder . just test
+        uses: devcontainers/action@v1
+        with:
+          runCmd: just test
+          workspaceFolder: .
 
       - name: Publish Features
         uses: devcontainers/action@v1
