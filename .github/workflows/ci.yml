@@ -11,8 +11,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Test Features
-        uses: devcontainers/action@v1
+      - name: Run feature tests
+        uses: devcontainers/ci@v0.3
         with:
           runCmd: just test
-          workspaceFolder: .

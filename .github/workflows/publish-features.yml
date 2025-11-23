@@ -18,10 +18,9 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Test Features
-        uses: devcontainers/action@v1
+        uses: devcontainers/ci@v0.3
         with:
           runCmd: just test
-          workspaceFolder: .
 
       - name: Publish Features
         uses: devcontainers/action@v1
