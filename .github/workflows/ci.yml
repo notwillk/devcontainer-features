@@ -11,13 +11,8 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: "20"
+      - name: Build devcontainer
+        run: devcontainer up --workspace-folder .
 
-      - name: Install devcontainer CLI
-        run: npm install -g @devcontainers/cli
-
-      - name: Run feature tests
-        run: ./test.sh
+      - name: Test Features
+        run: devcontainer exec --workspace-folder . just test
