@@ -2,8 +2,7 @@
   "permissions": {
     "allow": [
       "WebFetch(domain:github.com)",
-      "WebFetch(domain:raw.githubusercontent.com)",
-      "Bash(bash src/skills/test.sh)"
+      "WebFetch(domain:raw.githubusercontent.com)"
     ]
   }
 }
