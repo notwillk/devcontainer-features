@@ -1,0 +1,14 @@
+{
+  "id": "sqlfs",
+  "version": "1.0.0",
+  "name": "sqlfs",
+  "description": "Installs sqlfs, a CLI tool for creating a SQLite database from yaml/toml/json files.",
+  "documentationURL": "https://github.com/notwillk/sqlfs",
+  "options": {
+    "version": {
+      "type": "string",
+      "default": "latest",
+      "description": "Version of sqlfs to install (e.g. 'latest' or '0.1.0')"
+    }
+  }
+}
