@@ -4,6 +4,7 @@ set -euo pipefail
 SKILLS_LIST="${SKILLS:-}"
 
 npm install -g skills
+ln -sf "$(npm config get prefix)/bin/skills" /usr/local/bin/skills
 
 if [ -z "$SKILLS_LIST" ]; then
   echo "No skills specified, skipping skills add."
