@@ -1,0 +1,17 @@
+{
+  "id": "skills",
+  "version": "1.0.0",
+  "name": "skills",
+  "description": "Installs the skills CLI and adds specified agent skills globally (https://skills.sh).",
+  "documentationURL": "https://skills.sh/docs/cli",
+  "dependsOn": {
+    "ghcr.io/notwillk/devcontainer-features/node:1": {}
+  },
+  "options": {
+    "skills": {
+      "type": "string",
+      "default": "",
+      "description": "Comma-separated list of skills to install (e.g. 'owner/repo,owner2/repo2'). Equivalent to running 'skills add' for each."
+    }
+  }
+}
