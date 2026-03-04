@@ -1,0 +1,13 @@
+{
+  "id": "copilot-auth-persist",
+  "version": "1.0.0",
+  "name": "Copilot Auth Persistence",
+  "description": "Persist GitHub Copilot authentication across devcontainer rebuilds using a Docker volume.",
+  "mounts": [
+    {
+      "source": "copilot-auth-${devcontainerId}",
+      "target": "/home/vscode/.vscode-server/data/User/globalStorage/github.copilot",
+      "type": "volume"
+    }
+  ]
+}

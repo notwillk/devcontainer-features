@@ -1,0 +1,13 @@
+{
+  "id": "claude-auth-persist",
+  "version": "1.0.0",
+  "name": "Claude Auth Persistence",
+  "description": "Persist Claude authentication across devcontainer rebuilds using a Docker volume.",
+  "mounts": [
+    {
+      "source": "claude-auth-${devcontainerId}",
+      "target": "/home/vscode/.config/claude",
+      "type": "volume"
+    }
+  ]
+}
