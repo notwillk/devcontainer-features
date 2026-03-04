@@ -1,0 +1,26 @@
+{
+  "id": "opencode",
+  "version": "1.0.0",
+  "name": "OpenCode CLI",
+  "description": "Installs the OpenCode CLI (https://opencode.ai) with persistent credentials across devcontainer rebuilds.",
+  "documentationURL": "https://opencode.ai/docs",
+  "options": {
+    "version": {
+      "type": "string",
+      "default": "latest",
+      "description": "Version of OpenCode to install (e.g. '0.1.180'). Defaults to latest."
+    }
+  },
+  "mounts": [
+    {
+      "source": "opencode-config-${devcontainerId}",
+      "target": "/home/vscode/.config/opencode",
+      "type": "volume"
+    },
+    {
+      "source": "opencode-data-${devcontainerId}",
+      "target": "/home/vscode/.local/share/opencode",
+      "type": "volume"
+    }
+  ]
+}

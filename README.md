@@ -17,6 +17,7 @@ A set of individual [devcontainer features](https://containers.dev/implementors/
 | jq                  | ghcr.io/notwillk/devcontainer-features/jq                    | `version`             |
 | just                | ghcr.io/notwillk/devcontainer-features/just                  | `version`             |
 | node                | ghcr.io/notwillk/devcontainer-features/node                  | `version`             |
+| opencode            | ghcr.io/notwillk/devcontainer-features/opencode              | `version`             |
 | openscad-cli        | ghcr.io/notwillk/devcontainer-features/openscad-cli          | -                     |
 | pnpm                | ghcr.io/notwillk/devcontainer-features/pnpm                  | `version`             |
 | skills              | ghcr.io/notwillk/devcontainer-features/skills                | `skills`              |

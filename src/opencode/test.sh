@@ -1,0 +1,35 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+PROJECT_ROOT="$(cd "$(dirname "$0")/../.." && pwd)"
+TMP_PROJECT="$(mktemp -d)"
+trap 'rm -rf "$TMP_PROJECT"' EXIT
+
+cp -R "$PROJECT_ROOT/src" "$TMP_PROJECT/src"
+mkdir -p "$TMP_PROJECT/test/opencode"
+
+cat >"$TMP_PROJECT/test/opencode/test.sh" <<'EOS'
+#!/usr/bin/env bash
+set -euo pipefail
+
+# shellcheck source=/dev/null
+source dev-container-features-test-lib
+
+check "opencode available" opencode --version
+
+check "config directory exists" test -d "/home/vscode/.config/opencode"
+
+check "data directory exists" test -d "/home/vscode/.local/share/opencode"
+
+check "config directory is writable" bash -c "touch '/home/vscode/.config/opencode/.persist-test' && rm '/home/vscode/.config/opencode/.persist-test'"
+
+check "data directory is writable" bash -c "touch '/home/vscode/.local/share/opencode/.persist-test' && rm '/home/vscode/.local/share/opencode/.persist-test'"
+
+reportResults
+EOS
+chmod +x "$TMP_PROJECT/test/opencode/test.sh"
+
+devcontainer features test \
+  --project-folder "$TMP_PROJECT" \
+  --features opencode \
+  --base-image mcr.microsoft.com/devcontainers/base:ubuntu
