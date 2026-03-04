@@ -5,6 +5,7 @@
 		"context": "."
 	},
 	"features": {
+		"./features/claude-auth-persist": {},
 		"./features/devcontainer-cli": {},
 		"./features/just": {},
 		"ghcr.io/devcontainers/features/common-utils": {},

@@ -6,7 +6,7 @@
   "mounts": [
     {
       "source": "claude-auth-${devcontainerId}",
-      "target": "/home/vscode/.config/claude",
+      "target": "/home/vscode/.claude",
       "type": "volume"
     }
   ]
