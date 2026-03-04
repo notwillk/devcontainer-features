@@ -15,7 +15,7 @@ set -euo pipefail
 # shellcheck source=/dev/null
 source dev-container-features-test-lib
 
-CRED_DIR="/home/vscode/.config/claude"
+CRED_DIR="/home/vscode/.claude"
 
 check "credential directory exists" test -d "$CRED_DIR"
 
