@@ -5,7 +5,7 @@
   "description": "Persist Claude authentication across devcontainer rebuilds using a Docker volume.",
   "mounts": [
     {
-      "source": "claude-auth-${devcontainerId}",
+      "source": "claude-auth",
       "target": "/home/vscode/.claude",
       "type": "volume"
     }
