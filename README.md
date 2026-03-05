@@ -24,6 +24,7 @@ A set of individual [devcontainer features](https://containers.dev/implementors/
 | sqlfs               | ghcr.io/notwillk/devcontainer-features/sqlfs                 | `version`             |
 | turbo               | ghcr.io/notwillk/devcontainer-features/turbo                 | `version`             |
 | uv                  | ghcr.io/notwillk/devcontainer-features/uv                    | `version`             |
+| watchexec           | ghcr.io/notwillk/devcontainer-features/watchexec             | `version`             |
 | yq                  | ghcr.io/notwillk/devcontainer-features/yq                    | `version`             |
 
 ## Auth Persistence Features
@@ -40,4 +41,4 @@ A set of individual [devcontainer features](https://containers.dev/implementors/
 }
 ```
 
-Each devcontainer gets its own isolated volume, named using the devcontainer ID. The volume persists across rebuilds and is never tied to the host filesystem.
+The `claude-auth` volume is shared across all devcontainers on the host — authenticate once and it works everywhere. The codex and copilot volumes use the devcontainer ID to isolate credentials per project.
