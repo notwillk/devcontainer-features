@@ -1,6 +1,6 @@
 {
   "id": "openhands",
-  "version": "1.0.0",
+  "version": "1.3.0",
   "name": "OpenHands CLI",
   "description": "Install the OpenHands CLI from PyPI via pipx (uses package openhands with Python 3.12).",
   "options": {
@@ -8,6 +8,26 @@
       "type": "string",
       "default": "latest",
       "description": "Version of openhands to install. Use 'latest' to track the newest release."
+    },
+    "provider": {
+      "type": "string",
+      "default": "",
+      "description": "Optional provider prefix for model names that do not already include one (for example, 'litellm')."
+    },
+    "model": {
+      "type": "string",
+      "default": "",
+      "description": "Optional LLM model for ~/.openhands/agent_settings.json (for example, 'fireworks/kimi-k2p5')."
+    },
+    "api_key": {
+      "type": "string",
+      "default": "",
+      "description": "Optional LLM API key for ~/.openhands/agent_settings.json (can use ${localEnv:FIREWORKS_API_KEY})."
+    },
+    "base_url": {
+      "type": "string",
+      "default": "",
+      "description": "Optional LLM base URL for ~/.openhands/agent_settings.json."
     }
   }
 }

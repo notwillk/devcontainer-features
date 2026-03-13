@@ -8,16 +8,23 @@
 		"./features/claude-auth-persist": {},
 		"./features/devcontainer-cli": {},
 		"./features/just": {},
+		"./features/openhands": {
+			"provider": "litellm",
+			"model": "fireworks/kimi-k2p5",
+			"api_key": "${localEnv:FIREWORKS_API_KEY}",
+			"base_url": "https://api.fireworks.ai/inference/v1"
+		},
 		"ghcr.io/devcontainers/features/common-utils": {},
 		"ghcr.io/devcontainers/features/docker-in-docker:2": {}
 	},
 	"containerEnv": {
-		"REPO_PATH": "${containerWorkspaceFolder}"
+		"REPO_PATH": "${containerWorkspaceFolder}",
+		"FIREWORKS_API_KEY": "${localEnv:FIREWORKS_API_KEY}"
 	},
 	"customizations": {
 		"vscode": {
 			"extensions": [
-				"anthropic.claude-code"
+		        "omercnet.vscode-acp"
 			]
 		}
 	}
