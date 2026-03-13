@@ -1,0 +1,13 @@
+{
+  "id": "openhands",
+  "version": "1.0.0",
+  "name": "OpenHands CLI",
+  "description": "Install the OpenHands CLI from PyPI via pipx (uses package openhands with Python 3.12).",
+  "options": {
+    "version": {
+      "type": "string",
+      "default": "latest",
+      "description": "Version of openhands to install. Use 'latest' to track the newest release."
+    }
+  }
+}

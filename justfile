@@ -1,3 +1,5 @@
+set shell := ["bash", "-cu"]
+
 # List available recipes
 default:
     @just --list
@@ -9,7 +11,10 @@ test:
 
     ROOT="{{justfile_directory()}}"
 
-    mapfile -t TEST_SCRIPTS < <(find "$ROOT/src" -type f -name test.sh | sort)
+    TEST_SCRIPTS=()
+    while IFS= read -r script; do
+        TEST_SCRIPTS+=("$script")
+    done < <(find "$ROOT/src" -type f -name test.sh | sort)
 
     if [ ${#TEST_SCRIPTS[@]} -eq 0 ]; then
     echo "No test.sh scripts found under src/" >&2
