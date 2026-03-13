@@ -2,6 +2,10 @@
 set -euo pipefail
 
 VERSION="${VERSION:-latest}"
+PROVIDER="${PROVIDER:-}"
+MODEL="${MODEL:-}"
+API_KEY="${API_KEY:-}"
+BASE_URL="${BASE_URL:-}"
 PACKAGE="openhands"
 
 export DEBIAN_FRONTEND=noninteractive
@@ -29,9 +33,8 @@ if [ "$VERSION" != "latest" ] && [ "$VERSION" != "current" ]; then
 fi
 
 # Install with pipx for the current user (root when building) and, if present,
-# the default devcontainer user (usually vscode). Installing for the runtime
-# user is required because devcontainer CLI runs tests as that user, so a root-
-# only install would not be visible to `pipx list`.
+# the runtime devcontainer user. Installing for the runtime user is required
+# because devcontainer CLI runs tests as that user.
 install_for_user() {
   local target_user=$1
   local home_dir
@@ -59,12 +62,75 @@ install_for_user() {
   fi
 }
 
-# Always install for root (build-time), then try the common devcontainer user.
-install_for_user root
+write_settings_for_user() {
+  local target_user=$1
+  local home_dir
+  home_dir="$(getent passwd "$target_user" | cut -d: -f6)"
+  [ -n "$home_dir" ] || return 0
 
-# The devcontainers base images default to user 'vscode'; install there when it exists.
-if id vscode >/dev/null 2>&1; then
-  install_for_user vscode
+  local settings_dir="${home_dir}/.openhands"
+  local settings_file="${settings_dir}/agent_settings.json"
+  local model_value="${MODEL}"
+  local venv_python="${home_dir}/.local/pipx/venvs/${PACKAGE}/bin/python"
+
+  if [ -n "$PROVIDER" ] && [ -n "$model_value" ] && [ "${model_value#*/}" = "$model_value" ]; then
+    model_value="${PROVIDER}/${model_value}"
+  fi
+
+  mkdir -p "$settings_dir"
+  [ -x "$venv_python" ] || return 0
+
+  "$venv_python" - "$model_value" "$API_KEY" "$BASE_URL" "$settings_file" <<'PY'
+from pathlib import Path
+import sys
+
+from openhands.sdk import LLM
+from openhands_cli.utils import get_default_cli_agent
+
+model = sys.argv[1].strip()
+api_key = sys.argv[2].strip()
+base_url = sys.argv[3].strip()
+settings_file = Path(sys.argv[4])
+
+llm_kwargs = {"usage_id": "agent"}
+if model:
+    llm_kwargs["model"] = model
+if api_key:
+    llm_kwargs["api_key"] = api_key
+if base_url:
+    llm_kwargs["base_url"] = base_url
+
+agent = get_default_cli_agent(LLM(**llm_kwargs))
+settings_file.write_text(
+    agent.model_dump_json(context={"expose_secrets": True}, indent=2) + "\n",
+    encoding="utf-8",
+)
+PY
+
+  chown "$target_user":"$target_user" "$settings_dir" "$settings_file" 2>/dev/null || true
+  chmod 700 "$settings_dir" 2>/dev/null || true
+  chmod 600 "$settings_file" 2>/dev/null || true
+}
+
+# Always install for root (build-time), then for the resolved remote user when present.
+TARGET_USERS=("root")
+REMOTE_USER="${_REMOTE_USER:-}"
+if [ -n "$REMOTE_USER" ] && [ "$REMOTE_USER" != "root" ] && id "$REMOTE_USER" >/dev/null 2>&1; then
+  TARGET_USERS+=("$REMOTE_USER")
+elif id vscode >/dev/null 2>&1; then
+  TARGET_USERS+=("vscode")
+fi
+
+for target_user in "${TARGET_USERS[@]}"; do
+  install_for_user "$target_user"
+done
+
+# If any LLM settings were provided via feature options, materialize them as
+# ~/.openhands/agent_settings.json for installed users.
+if [ -n "$PROVIDER$MODEL$API_KEY$BASE_URL" ]; then
+  for target_user in "${TARGET_USERS[@]}"; do
+    write_settings_for_user "$target_user"
+  done
 fi
 
 # Confirm the CLI is available on PATH.
