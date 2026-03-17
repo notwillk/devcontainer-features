@@ -1,0 +1,18 @@
+{
+  "id": "prettier",
+  "version": "1.0.0",
+  "name": "prettier",
+  "dependsOn": {
+    "ghcr.io/notwillk/devcontainer-features/node:1": {}
+  },
+  "options": {
+    "version": {
+      "type": "string",
+      "default": "latest",
+      "description": "Prettier version to install (npm i -g prettier@<version>)"
+    }
+  },
+  "containerEnv": {
+    "DO_NOT_TRACK": "1"
+  }
+}
