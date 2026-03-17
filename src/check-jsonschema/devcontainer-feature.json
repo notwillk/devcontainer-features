@@ -1,0 +1,12 @@
+{
+  "id": "check-jsonschema",
+  "version": "1.0.0",
+  "name": "check-jsonschema",
+  "options": {
+    "version": {
+      "type": "string",
+      "default": "latest",
+      "description": "Version of check-jsonschema to install"
+    }
+  }
+}
