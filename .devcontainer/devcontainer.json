@@ -5,15 +5,9 @@
 		"context": "."
 	},
 	"features": {
-		"./features/claude-auth-persist": {},
 		"./features/devcontainer-cli": {},
 		"./features/just": {},
-		"./features/openhands": {
-			"provider": "litellm",
-			"model": "fireworks/kimi-k2p5",
-			"api_key": "${localEnv:FIREWORKS_API_KEY}",
-			"base_url": "https://api.fireworks.ai/inference/v1"
-		},
+		"./features/openhands": {},
 		"ghcr.io/devcontainers/features/common-utils": {},
 		"ghcr.io/devcontainers/features/docker-in-docker:2": {}
 	},

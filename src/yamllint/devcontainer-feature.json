@@ -1,0 +1,12 @@
+{
+  "id": "yamllint",
+  "version": "1.0.0",
+  "name": "yamllint",
+  "options": {
+    "version": {
+      "type": "string",
+      "default": "latest",
+      "description": "Version of yamllint to install"
+    }
+  }
+}
