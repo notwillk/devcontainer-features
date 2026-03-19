@@ -9,6 +9,7 @@ A set of individual [devcontainer features](https://containers.dev/implementors/
 | alias               | ghcr.io/notwillk/devcontainer-features/alias                 | `name`, `exec`        |
 | check-jsonschema    | ghcr.io/notwillk/devcontainer-features/check-jsonschema      | `version`             |
 | checksy (deprecated)| ghcr.io/notwillk/checksy/checksy                            | `version`             |
+| chromium            | ghcr.io/notwillk/devcontainer-features/chromium              | `image`, `platform`, `sandbox`   |
 | devcontainer-cli    | ghcr.io/notwillk/devcontainer-features/devcontainer-cli      | `version`             |
 | github-cli          | ghcr.io/notwillk/devcontainer-features/github-cli            | `version`             |
 | golang              | ghcr.io/notwillk/devcontainer-features/golang                | `version`             |
@@ -27,4 +28,3 @@ A set of individual [devcontainer features](https://containers.dev/implementors/
 | watchexec           | ghcr.io/notwillk/devcontainer-features/watchexec             | `version`             |
 | yamllint            | ghcr.io/notwillk/devcontainer-features/yamllint              | `version`             |
 | yq                  | ghcr.io/notwillk/devcontainer-features/yq                    | `version`             |
-
