@@ -7,8 +7,6 @@
 	"features": {
 		"./features/devcontainer-cli": {},
 		"./features/just": {},
-		"./features/openhands": {},
-		"./features/chromium": {},
 		"ghcr.io/devcontainers/features/common-utils": {},
 		"ghcr.io/devcontainers/features/docker-in-docker:2": {}
 	},
