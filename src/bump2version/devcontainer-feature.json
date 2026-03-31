@@ -1,0 +1,12 @@
+{
+  "id": "bump2version",
+  "version": "1.0.0",
+  "name": "bump2version",
+  "options": {
+    "version": {
+      "type": "string",
+      "default": "latest",
+      "description": "Version of bump2version to install"
+    }
+  }
+}
