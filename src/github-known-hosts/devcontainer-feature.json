@@ -1,0 +1,7 @@
+{
+  "id": "github-known-hosts",
+  "version": "1.0.0",
+  "name": "GitHub Known Hosts",
+  "description": "Adds GitHub SSH host keys to /etc/ssh/ssh_known_hosts.",
+  "options": {}
+}
