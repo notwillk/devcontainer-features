@@ -12,6 +12,7 @@ A set of individual [devcontainer features](https://containers.dev/implementors/
 | checksy (deprecated)| ghcr.io/notwillk/checksy/checksy                            | `version`             |
 | devcontainer-cli    | ghcr.io/notwillk/devcontainer-features/devcontainer-cli      | `version`             |
 | github-cli          | ghcr.io/notwillk/devcontainer-features/github-cli            | `version`             |
+| github-known-hosts  | ghcr.io/notwillk/devcontainer-features/github-known-hosts   | -                     |
 | golang              | ghcr.io/notwillk/devcontainer-features/golang                | `version`             |
 | jq                  | ghcr.io/notwillk/devcontainer-features/jq                    | `version`             |
 | just                | ghcr.io/notwillk/devcontainer-features/just                  | `version`             |
