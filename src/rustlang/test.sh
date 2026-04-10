@@ -17,6 +17,13 @@ source dev-container-features-test-lib
 check "rustc present" rustc --version
 check "cargo present" cargo --version
 
+if [ -n "${VERSION:-}" ] && [ "${VERSION}" != "latest" ] && [ "${VERSION}" != "stable" ]; then
+  EXPECTED="${VERSION#v}"
+  check "rustc matches requested version" bash -c "rustc --version | grep -Eq '^rustc ${EXPECTED}'"
+else
+  check "rustc version looks like semver" bash -c "rustc --version | grep -Eq '^rustc [0-9]+\.[0-9]+\.[0-9]+'"
+fi
+
 reportResults
 EOS
 chmod +x "$TMP_PROJECT/test/rustlang/test.sh"
