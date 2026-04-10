@@ -1,0 +1,13 @@
+{
+  "id": "rustlang",
+  "version": "1.0.0",
+  "name": "rustlang",
+  "description": "Install rustlang",
+  "options": {
+    "version": {
+      "type": "string",
+      "default": "latest",
+      "description": "Version of rustlang"
+    }
+  }
+}
