@@ -1,0 +1,16 @@
+{
+  "id": "act",
+  "version": "1.0.0",
+  "name": "act (GitHub Actions local runner)",
+  "description": "Run GitHub Actions locally using act",
+  "dependsOn": {
+    "ghcr.io/devcontainers/features/docker-in-docker:2": {}
+  },
+  "options": {
+    "version": {
+      "type": "string",
+      "default": "latest",
+      "description": "Version of act to install"
+    }
+  }
+}

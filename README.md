@@ -7,6 +7,7 @@ A set of individual [devcontainer features](https://containers.dev/implementors/
 | Tool                | Feature                                                      | Options               |
 |---------------------|--------------------------------------------------------------|-----------------------|
 | alias               | ghcr.io/notwillk/devcontainer-features/alias                 | `name`, `exec`        |
+| act                  | ghcr.io/notwillk/devcontainer-features/act                   | `version`             |
 | bump2version        | ghcr.io/notwillk/devcontainer-features/bump2version          | `version`             |
 | check-jsonschema    | ghcr.io/notwillk/devcontainer-features/check-jsonschema      | `version`             |
 | checksy (deprecated)| ghcr.io/notwillk/checksy/checksy                            | `version`             |
