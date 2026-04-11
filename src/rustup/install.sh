@@ -24,6 +24,12 @@ if ! command -v rustup &> /dev/null; then
     exit 1
 fi
 
+# Fix ownership after installation so the remote user can use rustup
+REMOTE_USER="${_REMOTE_USER:-root}"
+if [ "$REMOTE_USER" != "root" ] && id -u "$REMOTE_USER" &>/dev/null; then
+    chown -R "$REMOTE_USER:$REMOTE_USER" "$CARGO_HOME" "$RUSTUP_HOME" 2>/dev/null || true
+fi
+
 rustup --version
 
 mkdir -p /etc/profile.d
