@@ -17,13 +17,11 @@ source dev-container-features-test-lib
 
 check "opencode available" opencode --version
 
-check "config directory exists" test -d "/home/vscode/.config/opencode"
+check "config volume exists" test -d "/mnt/opencode/config"
+check "data volume exists" test -d "/mnt/opencode/data"
 
-check "data directory exists" test -d "/home/vscode/.local/share/opencode"
-
-check "config directory is writable" bash -c "touch '/home/vscode/.config/opencode/.persist-test' && rm '/home/vscode/.config/opencode/.persist-test'"
-
-check "data directory is writable" bash -c "touch '/home/vscode/.local/share/opencode/.persist-test' && rm '/home/vscode/.local/share/opencode/.persist-test'"
+check "config is writable" bash -c "touch '/mnt/opencode/config/.persist-test' && rm '/mnt/opencode/config/.persist-test'"
+check "data is writable" bash -c "touch '/mnt/opencode/data/.persist-test' && rm '/mnt/opencode/data/.persist-test'"
 
 reportResults
 EOS
