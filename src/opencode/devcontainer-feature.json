@@ -21,5 +21,6 @@
       "target": "/mnt/opencode/data",
       "type": "volume"
     }
-  ]
+  ],
+  "onCreateCommand": "sudo mkdir -p /mnt/opencode/config /mnt/opencode/data && sudo chown -R $(whoami):$(whoami) /mnt/opencode/config /mnt/opencode/data"
 }

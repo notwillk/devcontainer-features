@@ -1,15 +1,8 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-CONFIG_DIR="/mnt/opencode/config"
-DATA_DIR="/mnt/opencode/data"
-
-mkdir -p "$CONFIG_DIR" "$DATA_DIR"
-
-NON_ROOT_USER="${CONTAINER_USER:-vscode}"
-if id "$NON_ROOT_USER" &>/dev/null; then
-    chown -R "$NON_ROOT_USER:$NON_ROOT_USER" "$CONFIG_DIR" "$DATA_DIR"
-fi
+# Note: Volume mounts happen at container runtime, not build time.
+# Permission setup is handled by onCreateCommand in devcontainer-feature.json.
 
 OPENCODE_VERSION="${VERSION:-latest}"
 unset VERSION
