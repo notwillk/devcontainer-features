@@ -1,3 +1,5 @@
+[![Release devcontainer features](https://github.com/notwillk/devcontainer-features/actions/workflows/publish-features.yml/badge.svg)](https://github.com/notwillk/devcontainer-features/actions/workflows/publish-features.yml)
+
 # Devcontainer Features
 
 A set of individual [devcontainer features](https://containers.dev/implementors/features/) for various tools.
