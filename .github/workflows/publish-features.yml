@@ -23,9 +23,11 @@ jobs:
           runCmd: just test
 
       - name: Publish Features
-        uses: devcontainers/action@v1
+        uses: devcontainers/action@v1.4.3
         with:
           publish-features: "true"
           base-path-to-features: "./src"
+          imageName: "ghcr.io/${{ github.repository }}"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: "true"
