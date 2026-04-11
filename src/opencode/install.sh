@@ -6,6 +6,11 @@ DATA_DIR="/mnt/opencode/data"
 
 mkdir -p "$CONFIG_DIR" "$DATA_DIR"
 
+NON_ROOT_USER="${CONTAINER_USER:-vscode}"
+if id "$NON_ROOT_USER" &>/dev/null; then
+    chown -R "$NON_ROOT_USER:$NON_ROOT_USER" "$CONFIG_DIR" "$DATA_DIR"
+fi
+
 OPENCODE_VERSION="${VERSION:-latest}"
 unset VERSION
 
