@@ -5,32 +5,5 @@ on:
     types: [opened, synchronize, reopened]
 
 jobs:
-  discover:
-    runs-on: ubuntu-latest
-    outputs:
-      tests: ${{ steps.set-matrix.outputs.tests }}
-
-    steps:
-      - uses: actions/checkout@v4
-
-      - id: set-matrix
-        run: |
-          files=$(ls -1 src/*/test.sh | jq -R -s -c 'split("\n")[:-1]')
-          echo "tests=$files" >> "$GITHUB_OUTPUT"
-
-  test:
-    needs: discover
-    runs-on: ubuntu-latest
-
-    strategy:
-      fail-fast: false
-      matrix:
-        test: ${{ fromJson(needs.discover.outputs.tests) }}
-
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Run feature test in devcontainer
-        uses: devcontainers/ci@v0.3
-        with:
-          runCmd: bash "${{ matrix.test }}"
+  test-features:
+    uses: ./.github/workflows/test-features.yml
