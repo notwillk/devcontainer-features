@@ -8,6 +8,12 @@ DATA="/mnt/opencode/data"
 test -d "$CONFIG"
 test -d "$DATA"
 
+# Ensure proper ownership (volumes may reset permissions on restart)
+NON_ROOT_USER="${_REMOTE_USER:-${CONTAINER_USER:-vscode}}"
+if id "$NON_ROOT_USER" &>/dev/null; then
+  chown -R "$NON_ROOT_USER:$NON_ROOT_USER" "$CONFIG" "$DATA"
+fi
+
 # Repair symlinks if compatibility layer is used
 if [ -n "${HOME:-}" ]; then
   if [ -L "$HOME/.config/opencode" ]; then
