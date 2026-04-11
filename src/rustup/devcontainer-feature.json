@@ -1,6 +1,6 @@
 {
   "id": "rustup",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "name": "rustup",
   "description": "Install rustup (Rust toolchain manager)"
 }
