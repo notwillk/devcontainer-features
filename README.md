@@ -22,7 +22,7 @@ A set of individual [devcontainer features](https://containers.dev/implementors/
 | openscad-cli        | ghcr.io/notwillk/devcontainer-features/openscad-cli          | -                     |
 | pnpm                | ghcr.io/notwillk/devcontainer-features/pnpm                  | `version`             |
 | prettier            | ghcr.io/notwillk/devcontainer-features/prettier             | `version`             |
-| rustlang             | ghcr.io/notwillk/devcontainer-features/rustlang              | `version`             |
+| rustup             | ghcr.io/notwillk/devcontainer-features/rustup                | -                     |
 | skills              | ghcr.io/notwillk/devcontainer-features/skills                | `skills`              |
 | sqlfs               | ghcr.io/notwillk/devcontainer-features/sqlfs                 | `version`             |
 | turbo               | ghcr.io/notwillk/devcontainer-features/turbo                 | `version`             |
