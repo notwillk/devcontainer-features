@@ -7,3 +7,5 @@ on:
 jobs:
   test-features:
     uses: ./.github/workflows/test-features.yml
+    with:
+      test_script: "bash \"src/<FEATURE>/test.sh\""

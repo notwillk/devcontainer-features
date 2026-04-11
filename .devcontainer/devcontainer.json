@@ -5,6 +5,7 @@
 		"context": "."
 	},
 	"features": {
+		"./features/act": {},
 		"./features/devcontainer-cli": {},
 		"./features/just": {},
 		"./features/opencode": {},

@@ -5,7 +5,7 @@ on:
     inputs:
       test_script:
         type: string
-        default: "bash \"${{ matrix.test.path }}\""
+        required: true
       tests:
         type: string
         default: ""
