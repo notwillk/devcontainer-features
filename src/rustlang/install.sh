@@ -20,7 +20,11 @@ if ! command -v rustup &> /dev/null; then
 fi
 
 if ! command -v rustc &> /dev/null; then
-    rustup default stable
+    if [ "$V" != "latest" ] && [ "$V" != "stable" ]; then
+        rustup default "${V#v}"
+    else
+        rustup default stable
+    fi
 fi
 
 if [ "$V" != "latest" ] && [ "$V" != "stable" ]; then
