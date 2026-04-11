@@ -6,13 +6,5 @@
         "version": "1.85.0"
       }
     }
-  },
-  "install_1_94_1": {
-    "image": "ubuntu:focal",
-    "features": {
-      "rustlang": {
-        "version": "1.94.1"
-      }
-    }
   }
 }

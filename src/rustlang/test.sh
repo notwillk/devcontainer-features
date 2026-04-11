@@ -12,7 +12,10 @@ cat >"$TMP_PROJECT/test/rustlang/test.sh" <<'EOS'
 #!/usr/bin/env bash
 set -euo pipefail
 
+# shellcheck source=/dev/null
 source dev-container-features-test-lib
+
+export PATH="/usr/local/bin:$HOME/.cargo/bin:$PATH"
 
 check "rustc present" rustc --version
 check "cargo present" cargo --version
