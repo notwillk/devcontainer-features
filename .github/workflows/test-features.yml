@@ -3,9 +3,6 @@ name: Test Features
 on:
   workflow_call:
     inputs:
-      test_script:
-        type: string
-        required: true
       tests:
         type: string
         default: ""
@@ -28,7 +25,8 @@ jobs:
               split("\n")[:-1]
               | map({
                   path: .,
-                  name: (split("/")[1])
+                  name: (split("/")[1]),
+                  script: ("bash \"" + . + "\"")
                 })
             ')
             echo "tests=$files" >> "$GITHUB_OUTPUT"
@@ -51,4 +49,4 @@ jobs:
       - name: Run feature test in devcontainer
         uses: devcontainers/ci@v0.3
         with:
-          runCmd: ${{ inputs.test_script }}
+          runCmd: ${{ matrix.test.script }}
