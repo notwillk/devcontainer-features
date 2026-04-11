@@ -5,7 +5,9 @@
 		"context": "."
 	},
 	"features": {
+		"./features/act": {},
 		"./features/devcontainer-cli": {},
+		"./features/jq": {},
 		"./features/just": {},
 		"./features/opencode": {},
 		"ghcr.io/devcontainers/features/common-utils": {},

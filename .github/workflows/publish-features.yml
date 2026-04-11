@@ -6,7 +6,11 @@ on:
     branches: [main]
 
 jobs:
+  test-features:
+    uses: ./.github/workflows/test-features.yml
+
   publish:
+    needs: test-features
     if: ${{ github.ref == 'refs/heads/main' }}
     runs-on: ubuntu-latest
 
@@ -16,11 +20,6 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
-
-      - name: Test Features
-        uses: devcontainers/ci@v0.3
-        with:
-          runCmd: just test
 
       - name: Publish Features
         uses: devcontainers/action@v1.4.3
