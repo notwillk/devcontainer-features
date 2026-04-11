@@ -10,7 +10,10 @@ export RUSTUP_HOME="/usr/local/rustup"
 export PATH="$CARGO_HOME/bin:$PATH"
 
 mkdir -p "$CARGO_HOME" "$RUSTUP_HOME" "$RUSTUP_HOME/tmp"
-chmod -R 777 "$CARGO_HOME" "$RUSTUP_HOME"
+REMOTE_USER="${_REMOTE_USER:-root}"
+if [ "$REMOTE_USER" != "root" ] && id -u "$REMOTE_USER" &>/dev/null; then
+    chown -R "$REMOTE_USER:$REMOTE_USER" "$CARGO_HOME" "$RUSTUP_HOME" 2>/dev/null || true
+fi
 
 if ! command -v rustup &> /dev/null; then
     curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | CARGO_HOME="$CARGO_HOME" RUSTUP_HOME="$RUSTUP_HOME" sh -s -- -y
