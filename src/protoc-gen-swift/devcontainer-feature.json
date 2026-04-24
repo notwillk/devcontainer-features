@@ -1,0 +1,13 @@
+{
+  "name": "protoc-gen-swift",
+  "id": "protoc-gen-swift",
+  "version": "1.0.0",
+  "description": "Installs protoc-gen-swift (Swift protobuf plugin for protoc) in devcontainer. Swift toolchain will be installed automatically if not present.",
+  "options": {
+    "version": {
+      "type": "string",
+      "default": "latest",
+      "description": "protoc-gen-swift version to install (e.g., 1.28.2, or latest)"
+    }
+  }
+}

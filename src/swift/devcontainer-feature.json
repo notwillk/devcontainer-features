@@ -1,0 +1,13 @@
+{
+  "name": "swift",
+  "id": "swift",
+  "version": "1.0.0",
+  "description": "Installs Swift programming language toolchain in devcontainer",
+  "options": {
+    "version": {
+      "type": "string",
+      "default": "6.0.3",
+      "description": "Swift version to install (e.g., 6.0.3, 5.10.1, or latest)"
+    }
+  }
+}
