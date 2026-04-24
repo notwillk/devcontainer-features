@@ -6,11 +6,44 @@ on:
     branches: [main]
 
 jobs:
-  test-features:
-    uses: ./.github/workflows/test-features.yml
+  discover:
+    runs-on: ubuntu-latest
+    outputs:
+      tests: ${{ steps.set-matrix.outputs.tests }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - id: set-matrix
+        run: |
+          files=$(find src -name "test.sh" -type f | jq -R -s -c '
+            split("\n")[:-1]
+            | map({
+                path: .,
+                name: (split("/")[1]),
+                script: ("bash \"" + . + "\"")
+              })
+          ')
+          echo "tests=$files" >> "$GITHUB_OUTPUT"
+
+  test:
+    needs: discover
+    runs-on: ubuntu-latest
+    name: test ${{ matrix.test.name }}
+    strategy:
+      fail-fast: false
+      matrix:
+        test: ${{ fromJson(needs.discover.outputs.tests) }}
+
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run feature test in devcontainer
+        uses: devcontainers/ci@v0.3
+        with:
+          runCmd: ${{ matrix.test.script }}
 
   publish:
-    needs: test-features
+    needs: test
     if: ${{ github.ref == 'refs/heads/main' }}
     runs-on: ubuntu-latest
 

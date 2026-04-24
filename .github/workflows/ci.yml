@@ -8,7 +8,6 @@ jobs:
   detect-changes:
     runs-on: ubuntu-latest
     outputs:
-      run_all: ${{ steps.changes.outputs.run_all }}
       features: ${{ steps.changes.outputs.features }}
 
     steps:
@@ -16,18 +15,7 @@ jobs:
 
       - id: changes
         run: |
-          if git diff --name-only \
-               --diff-filter=d \
-               ${{ github.event.pull_request.base.sha }} \
-               ${{ github.event.pull_request.head.sha }} | \
-               grep -q '^\.github/workflows/test-features\.yml$'; then
-            echo "run_all=true" >> "$GITHUB_OUTPUT"
-            echo "features=[]" >> "$GITHUB_OUTPUT"
-            exit 0
-          fi
-
-          echo "run_all=false" >> "$GITHUB_OUTPUT"
-
+          # Get changed features (exclude deleted)
           changed_features=$(git diff --name-only \
             --diff-filter=d \
             ${{ github.event.pull_request.base.sha }} \
@@ -37,11 +25,48 @@ jobs:
             sort -u | \
             jq -R -s -c 'split("\n")[:-1]')
 
+          # Fail if empty
+          if [ "$(echo "$changed_features" | jq length)" -eq 0 ]; then
+            echo "No features detected in changes. Failing CI."
+            exit 1
+          fi
+
           echo "features=$changed_features" >> "$GITHUB_OUTPUT"
 
-  test-features:
+  discover:
     needs: detect-changes
-    uses: ./.github/workflows/test-features.yml
-    with:
-      run_all: ${{ needs.detect-changes.outputs.run_all == 'true' }}
-      features: ${{ needs.detect-changes.outputs.features }}
+    runs-on: ubuntu-latest
+    outputs:
+      tests: ${{ steps.set-matrix.outputs.tests }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - id: set-matrix
+        run: |
+          files=$(find src -name "test.sh" -type f | jq -R -s -c '
+            split("\n")[:-1]
+            | map({
+                path: .,
+                name: (split("/")[1]),
+                script: ("bash \"" + . + "\"")
+              })
+            | map(select(.name as $n | ${{ needs.detect-changes.outputs.features }} | index($n)))
+          ')
+          echo "tests=$files" >> "$GITHUB_OUTPUT"
+
+  test:
+    needs: discover
+    runs-on: ubuntu-latest
+    name: test ${{ matrix.test.name }}
+    strategy:
+      fail-fast: false
+      matrix:
+        test: ${{ fromJson(needs.discover.outputs.tests) }}
+
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run feature test in devcontainer
+        uses: devcontainers/ci@v0.3
+        with:
+          runCmd: ${{ matrix.test.script }}
