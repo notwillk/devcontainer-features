@@ -5,14 +5,16 @@ on:
     types: [opened, synchronize, reopened]
 
 jobs:
-  detect-changes:
+  discover:
     runs-on: ubuntu-latest
     outputs:
-      features: ${{ steps.changes.outputs.features }}
+      tests: ${{ steps.set-matrix.outputs.tests }}
 
     steps:
+      - uses: actions/checkout@v4
+
       - uses: actions/github-script@v7
-        id: changes
+        id: get-features
         with:
           script: |
             const { data: files } = await github.rest.pulls.listFiles({
@@ -34,19 +36,11 @@ jobs:
               return;
             }
             
-            core.setOutput('features', JSON.stringify(features));
-
-  discover:
-    needs: detect-changes
-    runs-on: ubuntu-latest
-    outputs:
-      tests: ${{ steps.set-matrix.outputs.tests }}
-
-    steps:
-      - uses: actions/checkout@v4
+            return features;
 
       - id: set-matrix
         run: |
+          features='${{ steps.get-features.outputs.result }}'
           files=$(find src -name "test.sh" -type f | jq -R -s -c '
             split("\n")[:-1]
             | map({
@@ -54,7 +48,7 @@ jobs:
                 name: (split("/")[1]),
                 script: ("bash \"" + . + "\"")
               })
-            | map(select(.name as $n | ${{ needs.detect-changes.outputs.features }} | index($n)))
+            | map(select(.name as $n | '"$features"' | index($n)))
           ')
           echo "tests=$files" >> "$GITHUB_OUTPUT"
 
