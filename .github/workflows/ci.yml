@@ -13,33 +13,31 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
 
       - id: changes
         run: |
-          if git diff --name-only origin/main...HEAD | grep -q '^\.github/workflows/test-features\.yml$'; then
+          if git diff --name-only \
+               --diff-filter=d \
+               ${{ github.event.pull_request.base.sha }} \
+               ${{ github.event.pull_request.head.sha }} | \
+               grep -q '^\.github/workflows/test-features\.yml$'; then
             echo "run_all=true" >> "$GITHUB_OUTPUT"
             echo "features=[]" >> "$GITHUB_OUTPUT"
-            echo "Workflow file changed - running all tests"
             exit 0
           fi
 
           echo "run_all=false" >> "$GITHUB_OUTPUT"
 
-          changed_features=$(git diff --name-only origin/main...HEAD | \
+          changed_features=$(git diff --name-only \
+            --diff-filter=d \
+            ${{ github.event.pull_request.base.sha }} \
+            ${{ github.event.pull_request.head.sha }} | \
             grep '^src/' | \
             cut -d'/' -f2 | \
             sort -u | \
-            while read -r feature; do
-              if [ -d "src/$feature" ]; then
-                echo "$feature"
-              fi
-            done | \
             jq -R -s -c 'split("\n")[:-1]')
 
           echo "features=$changed_features" >> "$GITHUB_OUTPUT"
-          echo "Changed features: $changed_features"
 
   test-features:
     needs: detect-changes
