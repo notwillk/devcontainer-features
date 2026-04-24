@@ -11,27 +11,30 @@ jobs:
       features: ${{ steps.changes.outputs.features }}
 
     steps:
-      - uses: actions/checkout@v4
-
-      - id: changes
-        run: |
-          # Get changed features (exclude deleted)
-          changed_features=$(git diff --name-only \
-            --diff-filter=d \
-            ${{ github.event.pull_request.base.sha }} \
-            ${{ github.event.pull_request.head.sha }} | \
-            grep '^src/' | \
-            cut -d'/' -f2 | \
-            sort -u | \
-            jq -R -s -c 'split("\n")[:-1]')
-
-          # Fail if empty
-          if [ "$(echo "$changed_features" | jq length)" -eq 0 ]; then
-            echo "No features detected in changes. Failing CI."
-            exit 1
-          fi
-
-          echo "features=$changed_features" >> "$GITHUB_OUTPUT"
+      - uses: actions/github-script@v7
+        id: changes
+        with:
+          script: |
+            const { data: files } = await github.rest.pulls.listFiles({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              pull_number: context.issue.number,
+              per_page: 100
+            });
+            
+            const features = [...new Set(
+              files
+                .map(f => f.filename)
+                .filter(path => path.startsWith('src/'))
+                .map(path => path.split('/')[1])
+            )];
+            
+            if (features.length === 0) {
+              core.setFailed('No features detected in changes. Failing CI.');
+              return;
+            }
+            
+            core.setOutput('features', JSON.stringify(features));
 
   discover:
     needs: detect-changes
