@@ -1,8 +1,13 @@
 {
   "name": "protoc-gen-swift",
   "id": "protoc-gen-swift",
-  "version": "1.0.0",
-  "description": "Installs protoc-gen-swift (Swift protobuf plugin for protoc) in devcontainer. Swift toolchain will be installed automatically if not present.",
+  "version": "1.0.1",
+  "description": "Installs protoc-gen-swift (Swift protobuf plugin for protoc) in devcontainer. Depends on the swift feature for Swift toolchain.",
+  "dependsOn": {
+    "ghcr.io/notwillk/devcontainer-features/swift": {
+      "version": "latest"
+    }
+  },
   "options": {
     "version": {
       "type": "string",

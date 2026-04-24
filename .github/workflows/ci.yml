@@ -5,5 +5,65 @@ on:
     types: [opened, synchronize, reopened]
 
 jobs:
-  test-features:
-    uses: ./.github/workflows/test-features.yml
+  discover:
+    runs-on: ubuntu-latest
+    outputs:
+      tests: ${{ steps.set-matrix.outputs.tests }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/github-script@v7
+        id: get-features
+        with:
+          script: |
+            const { data: files } = await github.rest.pulls.listFiles({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              pull_number: context.issue.number,
+              per_page: 100
+            });
+            
+            const features = [...new Set(
+              files
+                .map(f => f.filename)
+                .filter(path => path.startsWith('src/'))
+                .map(path => path.split('/')[1])
+            )];
+            
+            if (features.length === 0) {
+              core.setFailed('No features detected in changes. Failing CI.');
+              return;
+            }
+            
+            return features;
+
+      - id: set-matrix
+        run: |
+          features='${{ steps.get-features.outputs.result }}'
+          files=$(find src -name "test.sh" -type f | jq -R -s -c '
+            split("\n")[:-1]
+            | map({
+                path: .,
+                name: (split("/")[1]),
+                script: ("bash \"" + . + "\"")
+              })
+            | map(select(.name as $n | '"$features"' | index($n)))
+          ')
+          echo "tests=$files" >> "$GITHUB_OUTPUT"
+
+  test:
+    needs: discover
+    runs-on: ubuntu-latest
+    name: test ${{ matrix.test.name }}
+    strategy:
+      fail-fast: false
+      matrix:
+        test: ${{ fromJson(needs.discover.outputs.tests) }}
+
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run feature test in devcontainer
+        uses: devcontainers/ci@v0.3
+        with:
+          runCmd: ${{ matrix.test.script }}
