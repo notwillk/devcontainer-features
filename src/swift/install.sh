@@ -85,6 +85,24 @@ if [ -n "$toolchain_path" ] && [ -d "$toolchain_path/usr/bin" ]; then
     done
 fi
 
+# Create system-wide environment configuration so all users can find swiftly
+# This is needed because swiftly stores absolute paths in its config
+cat > /etc/profile.d/swiftly.sh << 'EOF'
+export SWIFTLY_HOME_DIR="/usr/local/share/swiftly"
+export SWIFTLY_BIN_DIR="/usr/local/bin"
+export SWIFTLY_TOOLCHAINS_DIR="/usr/local/share/swiftly/toolchains"
+export PATH="/usr/local/share/swiftly/bin:/usr/local/bin:${PATH}"
+EOF
+chmod 644 /etc/profile.d/swiftly.sh
+
+# Also add to bash.bashrc for non-login shells
+cat >> /etc/bash.bashrc << 'EOF'
+export SWIFTLY_HOME_DIR="/usr/local/share/swiftly"
+export SWIFTLY_BIN_DIR="/usr/local/bin"
+export SWIFTLY_TOOLCHAINS_DIR="/usr/local/share/swiftly/toolchains"
+export PATH="/usr/local/share/swiftly/bin:/usr/local/bin:${PATH}"
+EOF
+
 # Verify installation
 hash -r
 swift --version

@@ -15,7 +15,7 @@ set -euo pipefail
 # shellcheck source=/dev/null
 source dev-container-features-test-lib
 
-check "swift available" swift --version
+check "swift available" bash -lc "swift --version"
 # swift --version outputs like: Swift version 6.0.3 (swift-6.0.3-RELEASE)
 check "swift reports version" bash -lc "swift --version | grep -Eq 'Swift version [0-9]+\\.[0-9]+'"
 
