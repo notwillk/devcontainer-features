@@ -1,6 +1,6 @@
 {
   "name": "protobuf (protoc)",
-  "id": "protobuf",
+  "id": "protoc",
   "version": "1.0.0",
   "description": "Installs protoc (Protocol Buffers compiler) in devcontainer",
   "options": {
