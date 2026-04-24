@@ -24,10 +24,13 @@ A set of individual [devcontainer features](https://containers.dev/implementors/
 | opencode            | ghcr.io/notwillk/devcontainer-features/opencode              | `version`             |
 | openscad-cli        | ghcr.io/notwillk/devcontainer-features/openscad-cli          | -                     |
 | pnpm                | ghcr.io/notwillk/devcontainer-features/pnpm                  | `version`             |
+| protoc              | ghcr.io/notwillk/devcontainer-features/protoc                | `version`             |
+| protoc-gen-swift    | ghcr.io/notwillk/devcontainer-features/protoc-gen-swift      | `version`             |
 | prettier            | ghcr.io/notwillk/devcontainer-features/prettier             | `version`             |
 | rustup             | ghcr.io/notwillk/devcontainer-features/rustup                | -                     |
 | skills              | ghcr.io/notwillk/devcontainer-features/skills                | `skills`              |
 | sqlfs               | ghcr.io/notwillk/devcontainer-features/sqlfs                 | `version`             |
+| swift               | ghcr.io/notwillk/devcontainer-features/swift                   | `version`             |
 | turbo               | ghcr.io/notwillk/devcontainer-features/turbo                 | `version`             |
 | uv                  | ghcr.io/notwillk/devcontainer-features/uv                    | `version`             |
 | watchexec           | ghcr.io/notwillk/devcontainer-features/watchexec             | `version`             |
