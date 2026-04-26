@@ -30,6 +30,7 @@ A set of individual [devcontainer features](https://containers.dev/implementors/
 | rustup             | ghcr.io/notwillk/devcontainer-features/rustup                | -                     |
 | skills              | ghcr.io/notwillk/devcontainer-features/skills                | `skills`              |
 | sqlfs               | ghcr.io/notwillk/devcontainer-features/sqlfs                 | `version`             |
+| stow                | ghcr.io/notwillk/devcontainer-features/stow                  | -                     |
 | swift               | ghcr.io/notwillk/devcontainer-features/swift                   | `version`             |
 | turbo               | ghcr.io/notwillk/devcontainer-features/turbo                 | `version`             |
 | uv                  | ghcr.io/notwillk/devcontainer-features/uv                    | `version`             |
