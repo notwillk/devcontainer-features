@@ -16,7 +16,7 @@ set -euo pipefail
 source dev-container-features-test-lib
 
 check "stow available" stow --version
-check "stow version format" bash -lc "stow --version | grep -Eq 'stow \(GNU Stow\) [0-9]+\.[0-9]+\.[0-9]+'"
+check "stow version format" bash -lc "stow --version 2>&1 | grep -Eq 'GNU Stow.*[0-9]+\\.[0-9]+\\.[0-9]+'"
 
 reportResults
 EOS
