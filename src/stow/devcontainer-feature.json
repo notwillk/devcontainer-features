@@ -1,0 +1,11 @@
+{
+  "id": "stow",
+  "version": "1.0.0",
+  "name": "stow",
+  "description": "Installs GNU Stow, a symlink farm manager for handling software package management via apt on Debian/Ubuntu images.",
+  "documentationURL": "https://www.gnu.org/software/stow/",
+  "options": {},
+  "installsAfter": [
+    "ghcr.io/devcontainers/features/common-utils"
+  ]
+}
