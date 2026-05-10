@@ -1,0 +1,9 @@
+{
+  "name": "ansible",
+  "id": "ansible",
+  "version": "1.0.0",
+  "description": "Installs Ansible for provisioning and playbook validation",
+  "dependsOn": {
+    "ghcr.io/devcontainers/features/common-utils": {}
+  }
+}
