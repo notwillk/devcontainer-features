@@ -14,5 +14,6 @@ npm install -g --prefix "$PREFIX" "pnpm@${V}"
 
 # Make sure pnpm is on PATH
 ln -sf "$PREFIX/lib/node_modules/pnpm/bin/pnpm.cjs" "$PREFIX/bin/pnpm"
+chmod +x "$PREFIX/bin/pnpm"
 
 pnpm --version
