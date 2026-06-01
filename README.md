@@ -30,6 +30,7 @@ A set of individual [devcontainer features](https://containers.dev/implementors/
 | prettier            | ghcr.io/notwillk/devcontainer-features/prettier             | `version`             |
 | rustup             | ghcr.io/notwillk/devcontainer-features/rustup                | -                     |
 | skills              | ghcr.io/notwillk/devcontainer-features/skills                | `skills`              |
+| ssh-server          | ghcr.io/notwillk/devcontainer-features/ssh-server            | `port`                |
 | sqlfs               | ghcr.io/notwillk/devcontainer-features/sqlfs                 | `version`             |
 | stow                | ghcr.io/notwillk/devcontainer-features/stow                  | -                     |
 | swift               | ghcr.io/notwillk/devcontainer-features/swift                   | `version`             |
