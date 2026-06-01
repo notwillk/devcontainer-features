@@ -5,9 +5,9 @@ VERSION="${VERSION:-6.0.3}"
 
 # Install dependencies
 apt-get update
-apt-get install -y curl git gnupg2 lsb-release libicu-dev libcurl4-openssl-dev \
-    libxml2-dev libz-dev libbsd-dev libsqlite3-dev libedit-dev libpython3-dev \
-    pkg-config tzdata libz3-dev
+apt-get install -y ca-certificates curl git gnupg2 lsb-release libicu-dev \
+    libcurl4-openssl-dev libxml2-dev libz-dev libbsd-dev libsqlite3-dev \
+    libedit-dev libpython3-dev pkg-config tzdata libz3-dev
 
 # Determine architecture
 ARCH="$(uname -m)"
@@ -28,9 +28,17 @@ export PATH="${SWIFTLY_HOME_DIR}/bin:${SWIFTLY_BIN_DIR}:${PATH}"
 
 # Install Swiftly (Swift toolchain manager)
 echo "Installing Swiftly..."
-curl -O "https://download.swift.org/swiftly/linux/swiftly-${SWIFTLY_ARCH}.tar.gz"
-tar zxf "swiftly-${SWIFTLY_ARCH}.tar.gz"
-./swiftly init --quiet-shell-followup --skip-install --no-modify-profile
+swiftly_tmp_dir="$(mktemp -d)"
+trap 'rm -rf "$swiftly_tmp_dir"' EXIT
+swiftly_archive="$swiftly_tmp_dir/swiftly-${SWIFTLY_ARCH}.tar.gz"
+curl -fsSL "https://download.swift.org/swiftly/linux/swiftly-${SWIFTLY_ARCH}.tar.gz" -o "$swiftly_archive"
+tar -xzf "$swiftly_archive" -C "$swiftly_tmp_dir"
+swiftly_bin="$swiftly_tmp_dir/swiftly"
+if [ ! -x "$swiftly_bin" ]; then
+    echo "Error: swiftly binary not found after extracting $swiftly_archive" >&2
+    exit 1
+fi
+"$swiftly_bin" init --quiet-shell-followup --skip-install --no-modify-profile --assume-yes
 
 # Move swiftly to system location if it installed to default location
 if [ -d "$HOME/.local/share/swiftly" ]; then

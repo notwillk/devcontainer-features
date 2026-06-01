@@ -31,4 +31,4 @@ chmod +x "$TMP_PROJECT/test/act/test.sh"
 devcontainer features test \
   --project-folder "$TMP_PROJECT" \
   --features act \
-  --base-image mcr.microsoft.com/devcontainers/base:ubuntu
+  --base-image mcr.microsoft.com/devcontainers/base:ubuntu-24.04
