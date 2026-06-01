@@ -4,7 +4,7 @@
   "name": "SSH Server",
   "description": "Install and start an OpenSSH server for the configured devcontainer user.",
   "init": true,
-  "postStartCommand": "sudo -E /usr/local/share/devcontainer-ssh-server/start.sh",
+  "postStartCommand": "sudo --preserve-env=SSH_PUBLIC_KEY /usr/local/share/devcontainer-ssh-server/start.sh",
   "options": {
     "port": {
       "type": "string",

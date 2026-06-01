@@ -11,15 +11,12 @@
 		"./features/jq": {},
 		"./features/just": {},
 		"./features/opencode": {},
-		"./features/ssh-server": {
-			"port": "22"
-		},
 		"ghcr.io/devcontainers/features/common-utils": {},
 		"ghcr.io/devcontainers/features/docker-in-docker:2": {}
 	},
 	"containerEnv": {
 		"REPO_PATH": "${containerWorkspaceFolder}",
-	    "SSH_PUBLIC_KEY": "${localEnv:SSH_PUBLIC_KEY}"
+		"FIREWORKS_API_KEY": "${localEnv:FIREWORKS_API_KEY}"
 	},
 	"customizations": {
 		"vscode": {
@@ -28,7 +25,5 @@
 				"sst-dev.opencode"
 			]
 		}
-	},
-  	"appPort": ["2222:22"],
-  	"forwardPorts": [22]
+	}
 }

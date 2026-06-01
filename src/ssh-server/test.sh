@@ -33,7 +33,7 @@ cat >"$TMP_PROJECT/test/ssh-server/scenarios.json" <<'EOS'
     "remoteUser": "vscode",
     "features": {
       "ssh-server": {
-        "port": "22"
+        "port": "2222"
       }
     },
     "containerEnv": {
@@ -52,6 +52,7 @@ source dev-container-features-test-lib
 
 TEST_KEY="/tmp/devcontainer-ssh-server-test-key"
 KNOWN_HOSTS="/tmp/devcontainer-ssh-server-known-hosts"
+EXPECTED_PORT="${PORT:-2222}"
 
 cat > "$TEST_KEY" <<'KEY'
 -----BEGIN OPENSSH PRIVATE KEY-----
@@ -67,7 +68,8 @@ chmod 0600 "$TEST_KEY"
 check "managed key installed for vscode" grep -F "devcontainer-ssh-server-test" /home/vscode/.ssh/authorized_keys.d/devcontainer-ssh-server
 check "managed key owned by vscode" bash -lc "stat -c '%U:%G %a' /home/vscode/.ssh/authorized_keys.d/devcontainer-ssh-server | grep -Fx 'vscode:vscode 600'"
 check "sshd is running" pgrep -x sshd
-check "ssh login reaches vscode" bash -lc "ssh -i '$TEST_KEY' -o BatchMode=yes -o StrictHostKeyChecking=no -o UserKnownHostsFile='$KNOWN_HOSTS' -p 22 vscode@127.0.0.1 whoami | grep -Fx vscode"
+check "sshd listens on configured port" bash -lc "sudo /usr/sbin/sshd -T | grep -Fx 'port $EXPECTED_PORT'"
+check "ssh login reaches vscode" bash -lc "ssh -i '$TEST_KEY' -o BatchMode=yes -o StrictHostKeyChecking=no -o UserKnownHostsFile='$KNOWN_HOSTS' -p '$EXPECTED_PORT' vscode@127.0.0.1 whoami | grep -Fx vscode"
 
 reportResults
 EOS

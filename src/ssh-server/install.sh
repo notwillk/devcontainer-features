@@ -69,6 +69,8 @@ cat > "$INSTALL_DIR/start.sh" <<'EOF'
 #!/usr/bin/env bash
 set -euo pipefail
 
+export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+
 CONFIG_FILE="/usr/local/share/devcontainer-ssh-server/config.env"
 
 if [ -f "$CONFIG_FILE" ]; then
@@ -146,7 +148,8 @@ if [ "$TARGET_USER" != "root" ]; then
   fi
 
   cat > "$SUDOERS_FILE" <<EOF
-$TARGET_USER ALL=(root) NOPASSWD:SETENV: $INSTALL_DIR/start.sh
+Defaults!$INSTALL_DIR/start.sh env_keep += "SSH_PUBLIC_KEY"
+$TARGET_USER ALL=(root) NOPASSWD: $INSTALL_DIR/start.sh
 EOF
   chmod 0440 "$SUDOERS_FILE"
   visudo -cf "$SUDOERS_FILE"
