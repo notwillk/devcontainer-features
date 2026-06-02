@@ -14,24 +14,24 @@ case "$ARCH" in
   *) echo "Unsupported architecture: $ARCH" >&2; exit 1 ;;
 esac
 
-RELEASE_API="https://api.github.com/repos/nektos/act/releases"
 if [ "$V" = "latest" ]; then
-  release_json="$(curl -fsSL "$RELEASE_API/latest")"
+  LATEST_URL="$(curl -fsSLI -o /dev/null -w '%{url_effective}' https://github.com/nektos/act/releases/latest)"
+  TAG="${LATEST_URL##*/}"
 else
   V="${V#v}"
-  release_json="$(curl -fsSL "$RELEASE_API/tags/v${V}")"
-fi
-
-TAG="$(printf '%s' "$release_json" | sed -n 's/^ *"tag_name": *"v\?\([^"]*\)".*/v\1/p' | head -n1)"
-if [ -z "$TAG" ]; then
   TAG="v${V}"
 fi
-VERSION_NUMBER="${TAG#v}"
+
+if [ -z "$TAG" ] || [ "$TAG" = "latest" ]; then
+  echo "Unable to resolve the latest act release tag" >&2
+  exit 1
+fi
 
 TARBALL="act_Linux_${ACT_ARCH}.tar.gz"
 URL="https://github.com/nektos/act/releases/download/${TAG}/${TARBALL}"
 
 tmp_tar="$(mktemp)"
+echo "Downloading act from ${URL}"
 curl -fsSL "$URL" -o "$tmp_tar"
 
 tmp_dir="$(mktemp -d)"
