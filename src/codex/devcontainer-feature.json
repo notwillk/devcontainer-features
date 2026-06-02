@@ -1,0 +1,9 @@
+{
+  "id": "codex",
+  "version": "1.0.0",
+  "name": "Codex CLI",
+  "description": "Installs the OpenAI Codex CLI npm package.",
+  "dependsOn": {
+    "ghcr.io/notwillk/devcontainer-features/node:1": {}
+  }
+}

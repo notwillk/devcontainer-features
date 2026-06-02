@@ -14,6 +14,7 @@ A set of individual [devcontainer features](https://containers.dev/implementors/
 | bump2version        | ghcr.io/notwillk/devcontainer-features/bump2version          | `version`             |
 | check-jsonschema    | ghcr.io/notwillk/devcontainer-features/check-jsonschema      | `version`             |
 | checksy (deprecated)| ghcr.io/notwillk/checksy/checksy                            | `version`             |
+| codex               | ghcr.io/notwillk/devcontainer-features/codex                 | -                     |
 | devcontainer-cli    | ghcr.io/notwillk/devcontainer-features/devcontainer-cli      | `version`             |
 | github-cli          | ghcr.io/notwillk/devcontainer-features/github-cli            | `version`             |
 | github-known-hosts  | ghcr.io/notwillk/devcontainer-features/github-known-hosts   | -                     |
