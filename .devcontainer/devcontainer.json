@@ -10,7 +10,6 @@
 		"./features/github-cli": {},
 		"./features/jq": {},
 		"./features/just": {},
-		"./features/opencode": {},
 		"ghcr.io/devcontainers/features/common-utils": {},
 		"ghcr.io/devcontainers/features/docker-in-docker:2": {}
 	},
