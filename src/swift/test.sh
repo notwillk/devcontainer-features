@@ -26,4 +26,4 @@ chmod +x "$TMP_PROJECT/test/swift/test.sh"
 devcontainer features test \
   --project-folder "$TMP_PROJECT" \
   --features swift \
-  --base-image mcr.microsoft.com/devcontainers/base:ubuntu
+  --base-image mcr.microsoft.com/devcontainers/base:ubuntu-24.04
